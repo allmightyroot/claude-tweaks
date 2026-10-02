@@ -34,9 +34,11 @@ Glados │ my-project (main) │ Opus 5.5
   `--resume` (`/clear` starts a new session and gets a new name). It also tells
   Claude its own name and host, so you can ask a session who it is or ask it to
   rename itself.
-- A new name is also set as the session title, which is the name other
-  sessions use to message it (`SendMessage`), both locally and across machines
-  over Remote Control. A later `/rename` sticks; the hook won't reset it.
+- A new name is also set as the session title, but that only affects the
+  transcript and the resume picker. Other sessions message a session by the
+  name that `/rename <name>` sets, so run `/rename <name>` once per session
+  (Claude cannot run it itself; it reminds you in a new session). A later
+  `/rename` sticks; the hook won't reset it.
 - Across machines: each host prefers its own slice of the name list (picked by
   hashing the hostname), so sessions on your laptop and your desktop rarely
   collide, with no shared state needed. To guarantee no overlap, give each host

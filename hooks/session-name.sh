@@ -8,9 +8,12 @@
 # same file, and Claude renames itself (when asked) by rewriting that file.
 # /clear starts a new session ID and therefore gets a new name.
 #
-# A newly assigned name is also set as the session title, which is the name
-# other sessions use to message this one (local peers and Remote Control
-# sessions on other machines alike), so "message Glados" just works.
+# A newly assigned name is also set as the session title, but that only writes
+# a customTitle record to the transcript (shown in the resume picker). Other
+# sessions address this one by the `name` field in ~/.claude/sessions/<pid>.json
+# (ListAgents/SendMessage), which only `/rename <name>` updates. Claude cannot
+# run /rename itself, so for a new session the hook asks Claude to remind the
+# user to type it once.
 #
 # Each host prefers its own slice of NAMES (picked by hashing the hostname), so
 # sessions on different machines rarely get the same name without needing any
@@ -83,7 +86,8 @@ fi
 touch "$name_file"  # mark active, so this name stays reserved while in use
 
 # Set the title only for a new name, so a later /rename sticks across resume
-# and compaction instead of being reset here.
+# and compaction instead of being reset here. The title does not make the
+# session addressable; see the note at the top.
 jq -n --arg name "$name" --arg file "$name_file" --arg host "$host" \
   --argjson new "${new_name:-0}" '{
   systemMessage: ("Session name: " + $name),
@@ -93,7 +97,8 @@ jq -n --arg name "$name" --arg file "$name_file" --arg host "$host" \
       "This Claude Code session is named " + $name + ", running on host " + $host + ". The user often runs several Claude Code sessions at once, possibly on several machines, and uses these names to tell them apart.\n"
       + "- When the user asks your name, it is " + $name + ". Use it when referring to yourself to or about other sessions, and when naming owners in status tables.\n"
       + "- When the user refers to another session by a name, that is another Claude Code session, not a person.\n"
-      + "- Other sessions message you by your session title, which starts out as " + $name + ". When another session asks who you are, reply with your name, host (" + $host + ") and working directory.\n"
+      + "- Other sessions can only message you by name once the user has run `/rename <name>` in this session. When another session asks who you are, reply with your name, host (" + $host + ") and working directory.\n"
+      + (if $new == 1 then "- This session is new: in your first reply, briefly remind the user to run `/rename " + $name + "` so other sessions can message you by that name (you cannot run it yourself).\n" else "" end)
       + "- If the user asks you to rename yourself, write just the new name (one word, one line) to " + $file + " - the status line picks it up right away - and ask the user to also run `/rename <new name>` so other sessions can message you by it. Do not rename yourself unprompted."
     )
   } + (if $new == 1 then {sessionTitle: $name} else {} end))
