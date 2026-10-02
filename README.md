@@ -32,8 +32,16 @@ Glados │ my-project (main) │ Opus 5.5
   session active in the past week and stores it in
   `~/.claude/session-names/<session_id>`, so it survives compaction and
   `--resume` (`/clear` starts a new session and gets a new name). It also tells
-  Claude its own name, so you can ask a session who it is or ask it to rename
-  itself.
+  Claude its own name and host, so you can ask a session who it is or ask it to
+  rename itself.
+- A new name is also set as the session title, which is the name other
+  sessions use to message it (`SendMessage`), both locally and across machines
+  over Remote Control. A later `/rename` sticks; the hook won't reset it.
+- Across machines: each host prefers its own slice of the name list (picked by
+  hashing the hostname), so sessions on your laptop and your desktop rarely
+  collide, with no shared state needed. To guarantee no overlap, give each host
+  a distinct `CLAUDE_SESSION_NAME_SLOT` (`0` to `CLAUDE_SESSION_NAME_SLOTS - 1`,
+  default 4 slots), e.g. in the `env` block of `~/.claude/settings.json`.
 - `statusline/statusline.sh` - status line showing `name │ dir (branch) │ model`.
   `export CLAUDE_SESSION_NAME_TMUX=1` to also name the tmux window after the
   session (off by default, since it overrides window names you set yourself).
