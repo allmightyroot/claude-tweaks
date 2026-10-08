@@ -35,6 +35,9 @@ NAMES=(
   Azura Hircine Sovngarde Mudcrab Skeever Sweetroll Horker Spriggan Wabbajack
   # Addams Family
   Gomez Morticia Wednesday Pugsley Fester Lurch Thing Itt Grandmama
+  # Wednesday (Netflix)
+  Enid Xavier Bianca Ajax Eugene Weems Thornhill Marilyn Kinbott Galpin
+  Goody Rowan Divina Nevermore Agnes
   # Star Wars
   Chopper Artoo Threepio Kaytoo Huyang Grogu Chewie Ewok Jawa Porg Hoth Endor
   Dagobah Kessel Jakku Ahsoka Hera Sabine Ezra Kanan Zeb Lando Wedge Ackbar
@@ -43,6 +46,15 @@ NAMES=(
   Glados Wheatley Murderbot Art Hal Jarvis Friday Ultron Edi Legion Cortana
   Data Lore Bishop Mother Kitt Bender Marvin Eddie Deepthought Shodan Tars
   Case Baymax Walle Eve Auto Samantha Ava Mike Gerty Joshua Colossus Robby
+  Bumblebee Optimus Johnny5 Tachikoma K2SO
+  # Discworld
+  Vimes Granny Nanny Death Rincewind Luggage
+  # Hitchhiker's Guide
+  Zaphod Arthur Trillian Slartibartfast
+  # Studio Ghibli
+  Totoro Kiki Jiji Calcifer Chihiro Ponyo
+  # Muppets
+  Gonzo Kermit Fozzie Beaker Animal
 )
 
 input=$(cat)
