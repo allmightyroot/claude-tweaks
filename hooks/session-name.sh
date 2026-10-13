@@ -47,12 +47,8 @@ NAMES=(
   Data Lore Bishop Mother Kitt Bender Marvin Eddie Deepthought Shodan Tars
   Case Baymax Walle Eve Auto Samantha Ava Mike Gerty Joshua Colossus Robby
   Bumblebee Optimus Johnny5 Tachikoma K2SO
-  # Discworld
-  Vimes Granny Nanny Death Rincewind Luggage
   # Hitchhiker's Guide
   Zaphod Arthur Trillian Slartibartfast
-  # Studio Ghibli
-  Totoro Kiki Jiji Calcifer Chihiro Ponyo
   # Muppets
   Gonzo Kermit Fozzie Beaker Animal
 )
