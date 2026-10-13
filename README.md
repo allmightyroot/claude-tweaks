@@ -44,7 +44,14 @@ Glados │ my-project (main) │ Opus 5.5
   collide, with no shared state needed. To guarantee no overlap, give each host
   a distinct `CLAUDE_SESSION_NAME_SLOT` (`0` to `CLAUDE_SESSION_NAME_SLOTS - 1`,
   default 4 slots), e.g. in the `env` block of `~/.claude/settings.json`.
-- `statusline/statusline.sh` - status line showing `name │ dir (branch) │ model`.
+- `statusline/statusline.sh` - status line showing
+  `name@host │ dir (branch*) │ model │ ctx 62% │ Usage: 5h 4% (2h10m) 7d 23% (3d4h)`.
+  In the branch, `*` means uncommitted changes, `↑N` unpushed commits and `↓N`
+  unpulled ones. `ctx` is the context window used. `Usage` is your plan's 5-hour
+  and 7-day limits from `/usage`, with time until each resets (Claude.ai
+  subscribers only). Percentages are green/yellow/red at 50%/80%. The host
+  (`@durnehviir`) shows over SSH; set `CLAUDE_STATUSLINE_HOST=always` or `never`
+  to override.
   `export CLAUDE_SESSION_NAME_TMUX=1` to also name the tmux window after the
   session (off by default, since it overrides window names you set yourself).
 
