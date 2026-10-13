@@ -25,7 +25,7 @@ Gives each Claude Code session a short, memorable name (`Glados`, `Riften`,
 once you can say "ask Glados" instead of "the one in the other repo".
 
 ```
-Glados │ my-project (main) │ Opus 5.5
+Glados@laptop │ my-project (main* ↑1) │ Opus 5.5 │ ctx 62% │ Usage: 5h 4% (2h10m) 7d 23% (3d4h)
 ```
 
 - `hooks/session-name.sh` - SessionStart hook. Picks a name not used by any
@@ -45,14 +45,14 @@ Glados │ my-project (main) │ Opus 5.5
   a distinct `CLAUDE_SESSION_NAME_SLOT` (`0` to `CLAUDE_SESSION_NAME_SLOTS - 1`,
   default 4 slots), e.g. in the `env` block of `~/.claude/settings.json`.
 - `statusline/statusline.sh` - status line showing
-  `name@host │ dir (branch*) │ model │ ctx 62% │ Usage: 5h 4% (2h10m) 7d 23% (3d4h)`.
+  `name@host │ dir (branch*) │ model │ ctx │ Usage`, as in the example above.
   In the branch, `*` means uncommitted changes, `↑N` unpushed commits and `↓N`
   unpulled ones. `ctx` is the context window used. `Usage` is your plan's 5-hour
   and 7-day limits from `/usage`, with time until each resets (Claude.ai
   subscribers only). Percentages are green/yellow/red at 50%/80%. The host
   (`@durnehviir`) shows over SSH; set `CLAUDE_STATUSLINE_HOST=always` or `never`
   to override.
-  `export CLAUDE_SESSION_NAME_TMUX=1` to also name the tmux window after the
+  Set `CLAUDE_SESSION_NAME_TMUX=1` to also name the tmux window after the
   session (off by default, since it overrides window names you set yourself).
 
 To customize the names, edit the `NAMES` array in `hooks/session-name.sh` and
