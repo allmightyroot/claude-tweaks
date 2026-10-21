@@ -8,6 +8,10 @@ repos:
       - id: check-merge-conflict
       - id: check-added-large-files
       - id: check-executables-have-shebangs
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
     hooks:
