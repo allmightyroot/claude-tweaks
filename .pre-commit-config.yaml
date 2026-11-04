@@ -1,17 +1,31 @@
 repos:
+  # >>> BEGIN managed baseline: edit dotfiles/precommit-baseline/.pre-commit-config.yaml, then run precommit-baseline
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+        args: ["--allow-multiple-documents", "--unsafe"]
       - id: check-merge-conflict
       - id: check-added-large-files
-      - id: check-executables-have-shebangs
+      # Mac/Linux/Windows hygiene: mixed line endings ("auto" only fixes files
+      # that mix them; it never converts a consistently-CRLF file) and
+      # filenames that differ only by case.
+      - id: mixed-line-ending
+      - id: check-case-conflict
+
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.1
     hooks:
       - id: gitleaks
+  # <<< END managed baseline
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-executables-have-shebangs
+
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
     hooks:
